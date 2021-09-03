@@ -1,0 +1,27 @@
+[
+    {
+        "first_name": "Amrita",
+        "last_name": "Kumari",
+        "job_title": "9873766767",
+        "designation": "Developer"
+    },
+    {
+        "first_name": "Priyanka",
+        "last_name": "Kumari",
+        "job_title": "9883766767",
+        "designation": "Jr Developer"
+    },
+    {
+        "first_name": "Arun",
+        "last_name": "Kumar",
+        "job_title": "9873766767",
+        "designation": "Developer"
+    },
+    {
+        "first_name": "Rohit",
+        "last_name": "Kumar",
+        "job_title": "9873766789",
+        "designation": "Testor"
+    }
+
+]

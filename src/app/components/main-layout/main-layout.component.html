@@ -1,0 +1,95 @@
+
+    <mat-toolbar fxFlex="10%" color="primary" class="fixed-topnav " class="example-header">
+        <button mat-icon-button (click)="isExpanded = !isExpanded">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <img src={{logo}} width="200" height="100" />
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="clearCount()" [matMenuTriggerFor]="menu" matTooltip="PopOver Me!">
+            <mat-icon class="icon">notifications</mat-icon>
+            <span class="badge" *ngIf="badgeCount > 0">{{badgeCount}}</span>
+        </button>
+        <mat-menu #menu="matMenu">
+            <span mat-menu-item [disableRipple]="true" (click)="$event.stopPropagation()">
+
+            </span>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="profilemenu" #menuTrigger="matMenuTrigger"
+            (click)="menuTrigger.openMenu()">
+            <!-- <mat-icon>menu</mat-icon>
+         -->
+            <!-- <a mat-icon-button> -->
+            <mat-icon class="icon" *ngIf="!avatar">account_circle</mat-icon>
+            <img *ngIf="avatar" [src]="avatar" />
+            <!-- </a> -->
+        </button>
+        <mat-menu #profilemenu="matMenu" [overlapTrigger]="false">
+            <span (mouseleave)="menuTrigger.closeMenu()">
+                <button (click)="logout()" mat-menu-item>
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Logout</span>
+                </button>
+            </span>
+        </mat-menu>
+    </mat-toolbar>
+    <mat-sidenav-container  class="example-container" autosize>
+        <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
+            (mouseleave)="mouseleave()">
+            <mat-nav-list *ngFor="let item of navItems">
+                <mat-list-item (click)="onItemSelected(item)" *ngIf="!(item.children && item.children.length)"
+                    class="parent">
+                    <span class="full-width" *ngIf="isExpanded || isShowing">{{item.displayName}}</span>
+                    <mat-icon mat-list-icon>{{item.iconName}}</mat-icon>
+                    <!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">
+                    expand_more</mat-icon> -->
+                </mat-list-item>
+
+                <mat-list-item (click)="onItemSelected(item)" *ngIf="item.children && item.children.length"
+                    (click)="showSubmenu = !showSubmenu" class="parent">
+                    <span class="full-width" *ngIf="isExpanded || isShowing">{{item.displayName}}</span>
+                    <mat-icon mat-list-icon>{{item.iconName}}</mat-icon>
+                    <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">
+                        expand_more</mat-icon>
+                </mat-list-item>
+
+                <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isExpanded && showSubmenu">
+                    <ng-container *ngFor="let child of item.children">
+                        <mat-list-item (click)="onItemSelected(child)"
+                            *ngIf="!(child.children && child.children.length)" class="parent">
+                            <span class="full-width" *ngIf="isExpanded || isShowing">{{child.displayName}}</span>
+                            <mat-icon mat-list-icon>{{child.iconName}}</mat-icon>
+                            <!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">
+                        expand_more</mat-icon> -->
+                        </mat-list-item>
+                        <mat-list-item (click)="onItemSelected(child)" *ngIf="child.children && child.children.length"
+                            (click)="showSubSubMenu = !showSubSubMenu" class="parent">
+                            <span class="full-width" *ngIf="isExpanded || isShowing">{{child.displayName}}</span>
+                            <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}"
+                                *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+                        </mat-list-item>
+                        <div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}"
+                            *ngIf="isExpanded  && showSubSubMenu">
+                            <ng-container *ngFor="let subchild of child.children">
+                                <mat-list-item (click)="onItemSelected(subchild)">{{subchild.displayName}}
+                                </mat-list-item>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                </div>
+            </mat-nav-list>
+            <mat-nav-list>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <div class="example-sidenav-content">
+            <router-outlet></router-outlet>
+        </div>
+        
+        
+    </mat-sidenav-container>
+
+    <mat-toolbar class="example-footer">
+        <span class="spacer"></span>
+        ©2021 Financepeer. All Rights Reserved.
+        <span class="spacer"></span>
+    </mat-toolbar>

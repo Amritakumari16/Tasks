@@ -1,0 +1,35 @@
+<div class="outer-container">
+    <div class="page-wrap">
+        <mat-card class="container">
+          <form [formGroup]="form">
+            <label>Select File (only JSON)</label>
+            <div>
+                <input type="file"  formControlName="configJson" (change)="selectFile($event)" />
+            </div>
+          </form>
+        </mat-card>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="first_name">
+          <mat-header-cell *matHeaderCellDef> <span >First Name</span>  </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.first_name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="last_name">
+          <mat-header-cell *matHeaderCellDef> <span >Last Name</span>  </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.last_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="job_title">
+          <mat-header-cell *matHeaderCellDef> <span >Job Title</span> </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.job_title}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="designation">
+          <mat-header-cell *matHeaderCellDef> <span >Designation</span>  </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.designation}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"  ></mat-row>
+      </mat-table>
+</div>

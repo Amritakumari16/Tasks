@@ -1,0 +1,20 @@
+<div class="page-wrap">
+    <mat-card class="container">
+        <img src="/assets/logo.png" alt="Company or Product Logo" class="logo" />
+        <form [formGroup]="loginForm">
+            <mat-form-field>
+                <input matInput placeholder="Email Address" formControlName="email" type="email" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" placeholder="Password" formControlName="password" required>
+            </mat-form-field>
+            <div class="text-center flex-center remember-me mat-typography">
+                <button [disabled]="!loginForm.valid" mat-raised-button color="primary" class="login"
+                    (click)="login()">LOG IN</button>
+                <mat-checkbox class="text-center mat-typography" formControlName="remember">Remember Me</mat-checkbox>
+            </div>
+        </form>
+ 
+    </mat-card>
+
+</div>
